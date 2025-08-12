@@ -10,7 +10,7 @@ S-Lab, Nanyang Technological University
 </div>
 
 
-### The whole framework:
+### 👷 The whole framework:
 <div align="center">
 <img src="./Imgs/pipeline.png" width="800px">
 </div>
@@ -22,13 +22,13 @@ S-Lab, Nanyang Technological University
 layouts. While existing methods primarily focus on English text, less attention has been paid to more complex scripts like Chinese. In this paper, we introduce a high-quality text image SR framework designed to restore the precise strokes of low-resolution (LR) Chinese characters. Unlike methods that rely on character recognition priors to regularize the SR task, we propose a novel structure prior that offers structure-level guidance to enhance visual quality. Our framework incorporates this structure prior within a StyleGAN model, leveraging its generative capabilities for restoration. To maintain the integrity of character structures while accommodating various font styles and layouts, we implement a codebook-based mechanism that restricts the generative space of StyleGAN. Each code in the codebook represents the structure of a specific character, while the vector $w$ in StyleGAN controls the character's style, including typeface, orientation, and location. Through the collaborative interaction between the codebook and style, we generate a high-resolution structure prior that aligns with LR characters both spatially and structurally. Experiments demonstrate that this structure prior provides robust, character-specific guidance, enabling the accurate restoration of clear strokes in degraded characters, even for real-world LR Chinese text with irregular layouts.  </p>
 -->
 
-### Character Structure Prior Pretraining:
+### 👷 Character Structure Prior Pretraining:
 <div align="center">
 <img src="./Imgs/prior.gif" width="800px">
 </div>
 
 
-## MARCONet *VS.* MARCONet++
+## 🔔 MARCONet *VS.* MARCONet++
 > - MARCONet is designed for **regular character layout** only. 
 > - MARCONet++ has more accurate alignment between character structural prior (green) and the degraded image.
 <div align="center">
@@ -37,12 +37,12 @@ layouts. While existing methods primarily focus on English text, less attention 
 
 
 
-## TODO
+## 📋 TODO
 - [x] Release the inference code and model.
 - [ ] Release the training code (no plans to release for now). 
 
 
-## Getting Started
+## 🚶 Getting Started
 
 ```
 git clone https://github.com/csxmli2016/MARCONetPlusPlus
@@ -55,7 +55,7 @@ BASICSR_EXT=True pip install basicsr
 > Please carefully follow the installation steps, especially the final one with **BASICSR_EXT=True**.
 > When torchvision > 0.15.2, there may be some problems in BasicSR.
 
-## Inference
+## 🚶 Inference
 Download the pre-trained models
 ```
 python utils/download_github.py
@@ -126,24 +126,31 @@ Despite its high-fidelity performance, MARCONet++ still struggles in some real-w
 
 <img src="./Imgs/failure_case.jpg"  width="800px">
 
-> Restoring complex character with high fidelity under such conditions remains significant challenge.
+> 🍒 Restoring complex character with high fidelity under such conditions remains significant challenge.
 We have also explored various approaches, such as training OCR models with Transformers and using YOLO or Transformer-based methods for character detection, but these methods generally encounter the same issues. 
 We encourage any potential collaborations to jointly tackle this challenge and advance robust, high-fidelity text restoration.
 
 
 
 
-## License
+## ©️ License
 This project is licensed under <a rel="license" href="https://github.com/csxmli2016/MARCONetPlusPlus/blob/main/LICENSE">NTU S-Lab License 1.0</a>. Redistribution and use should follow this license.
 
 
-## Citation
+## 🍻 Citation
 ```
-@InProceedings{li2025marconetplus,
+@article{li2025marconetplus,
   author = {Li, Xiaoming and Zuo, Wangmeng and Loy, Chen Change},
   title = {Enhanced Generative Structure Prior for Chinese Text Image Super-Resolution},
-  booktitle = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
   year = {2025}
+}
+
+@InProceedings{li2023marconet,
+  author = {Li, Xiaoming and Zuo, Wangmeng and Loy, Chen Change},
+  title = {Learning Generative Structure Prior for Blind Text Image Super-resolution},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  year = {2023}
 }
 ```
 
