@@ -1,4 +1,5 @@
 from basicsr.utils.download_util import load_file_from_url
+import os
 
 os.makedirs('./checkpoints', exist_ok=True)
 
