@@ -33,7 +33,7 @@ layouts. While existing methods primarily focus on English text, less attention 
 ## TODO
 - [x] Release the inference code and model.
 - [x] Release the synthetic pipeline of our training images.
-- [] Release the training code (no plans to release for now). 
+- [ ] Release the training code (no plans to release for now). 
 
 
 ## Getting Start
@@ -56,7 +56,7 @@ python checkpoints/download_github.py
 ```
 
 
-## Inference for *Regular Chinese Text Image* SR
+## Inference
 ```
 CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py 
 ```
@@ -91,7 +91,7 @@ export BASICSR_JIT='True'
 
 
 ## ‼️ Failure Case
-Despite its high-fidelity performance, MARCONet++ still struggles in some real-world scenarios as it highly relies on:
+MARCONet++ still struggles in some real-world scenarios due to its heavy reliance on:
 
 - Real world character **Recognition** on complex degraded text images
 - Real world character **Detection** on complex degraded text images
