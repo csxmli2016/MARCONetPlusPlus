@@ -75,7 +75,7 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -s
 -i: LR path, default: ./Testsets/LR_TextLines or ./Testsets/LR_TextWhole
 -o: save path, default: None will automatically make the saving dir with the format of '[LR path]_TIME_MARCONet'
 -a: if the input is text lines, use -a; otherwise, the input is the whole text image and needs text line detection, do not use -a
--s: if you want to see the details of prior alignment, predicted characters, and locations, use -a 
+-s: if you want to see the details of prior alignment, predicted characters, and locations, use -s 
 ```
 
 ### ⚠️ If you encounter the following error:
