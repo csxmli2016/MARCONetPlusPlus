@@ -106,7 +106,7 @@ Restoring complex text with high fidelity under such conditions remains challeng
 
 
 ## License
-This project is licensed under <a rel="license" href="https://github.com/csxmli2016/MARCONet/blob/main/LICENSE">NTU S-Lab License 1.0</a>. Redistribution and use should follow this license.
+This project is licensed under <a rel="license" href="https://github.com/csxmli2016/MARCONetPlusPlus/blob/main/LICENSE">NTU S-Lab License 1.0</a>. Redistribution and use should follow this license.
 
 
 ## Citation
