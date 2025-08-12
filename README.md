@@ -53,7 +53,7 @@ pip install -r requirements.txt
 BASICSR_EXT=True pip install basicsr
 ```
 > Please carefully follow the installation steps, especially the final one with **BASICSR_EXT=True**.
-> When torchvision > 0.15.2, there may be some problems in BasicSR.
+> When torchvision > 0.15.2 (except 0.19.0), there may be some problems in BasicSR.
 
 ## 🚶 Inference
 Download the pre-trained models
