@@ -94,7 +94,7 @@ export BASICSR_JIT='True'
 
 
 
-## Restoring Real-world Chinese Text Images
+## 🏃 Restoring Real-world Chinese Text Images
 > We use [BSRGAN](https://github.com/cszn/BSRGAN) to restore the background region
 
 [<img src="Imgs/whole_1.jpg" height="270px"/>](https://imgsli.com/NDA2MDUw) [<img src="Imgs/whole_2.jpg" height="270px"/>](https://imgsli.com/NDA2MDYw) 
@@ -102,14 +102,14 @@ export BASICSR_JIT='True'
 [<img src="Imgs/whole_3.jpg" height="540px"/>](https://imgsli.com/NDA2MTE0) [<img src="Imgs/whole_4.jpg" height="540px" width="418px"/>](https://imgsli.com/NDA2MDYy) 
 
 
-## Restoring detected text line
+## 🏃 Restoring detected text line
 
 <img src="Imgs/text_line_sr.jpg" width="800px"/>
 
 
 
 
-## Style w interpolation from three characters with different styles 
+## 🏃 Style w interpolation from three characters with different styles 
 <img src="./Imgs/w-interpolation.gif"  width="400px">
 
 
