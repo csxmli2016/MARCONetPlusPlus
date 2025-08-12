@@ -25,7 +25,6 @@ layouts. While existing methods primarily focus on English text, less attention 
 ### Character Structure Prior Pretraining:
 <div align="center">
 <img src="./Imgs/prior.gif" width="800px">
-<p align="center">  </p>
 </div>
 
 
