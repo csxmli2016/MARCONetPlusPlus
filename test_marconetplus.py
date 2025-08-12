@@ -1,15 +1,13 @@
 
 import torch
-from torch.hub import download_url_to_file, get_dir
 import cv2 
 import numpy as np
-import os.path
 import torch.nn.functional as F
 import time
 import argparse
+import os
 import os.path as osp
-from urllib.parse import urlparse
-from models.TextEnhancement import MARCONetPlus as MARCONetPlus
+from models.TextEnhancement import MARCONetPlus
 from utils.utils_image import get_image_paths, imread_uint, uint2tensor4, tensor2uint
 from networks.rrdbnet2_arch import RRDBNet as BSRGAN
 
@@ -131,9 +129,9 @@ def inference(input_path=None, output_path=None, aligned=False, save_text=False,
             continue
         if not aligned:
             SQ = cv2.resize(SQ.astype(np.float32), (width_S, height_S), interpolation=cv2.INTER_AREA)
-            cv2.imwrite(os.path.join(E_path, img_name+ext), SQ[:,:,::-1])
+            cv2.imwrite(os.path.join(E_path, img_name+ext), SQ[:,:,::-1].astype(np.uint8))
         else:
-            cv2.imwrite(os.path.join(E_path, img_name+ext), en_texts[0][:,:,::-1])
+            cv2.imwrite(os.path.join(E_path, img_name+ext), en_texts[0][:,:,::-1].astype(np.uint8))
 
         ####################################
         #####(3) Save Cropped Results
