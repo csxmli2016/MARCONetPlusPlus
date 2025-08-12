@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 import math
-from basicsr.ops.fused_act import FusedLeakyReLU, fused_leaky_relu
+from op.fused_act import FusedLeakyReLU, fused_leaky_relu
 
 
 class TextPriorModel(nn.Module):
