@@ -99,7 +99,7 @@ export BASICSR_JIT='True'
 
 [<img src="Imgs/whole_1.jpg" height="270px"/>](https://imgsli.com/NDA2MDUw) [<img src="Imgs/whole_2.jpg" height="270px"/>](https://imgsli.com/NDA2MDYw) 
 
-[<img src="Imgs/whole_3.jpg" height="540px"/>](https://imgsli.com/NDA2MDYx) [<img src="Imgs/whole_4.jpg" height="540px" width="418px"/>](https://imgsli.com/NDA2MDYy) 
+[<img src="Imgs/whole_3.jpg" height="540px"/>](https://imgsli.com/NDA2MTE0) [<img src="Imgs/whole_4.jpg" height="540px" width="418px"/>](https://imgsli.com/NDA2MDYy) 
 
 
 ## Restoring detected text line
