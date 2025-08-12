@@ -1,17 +1,20 @@
 
-
+<div align="center">
+  
   ## [Enhanced Generative Structure Prior for Chinese Text Image Super-Resolution](https://arxiv.org/pdf/2508.07537)
 
 [Xiaoming Li](https://csxmli2016.github.io/), [Wangmeng Zuo](https://scholar.google.com/citations?hl=en&user=rUOpCEYAAAAJ&view_op=list_works), [Chen Change Loy](https://www.mmlab-ntu.com/person/ccloy/)
 
-
 S-Lab, Nanyang Technological University
 
+</div>
 
 
+### The whole framework:
 <div align="center">
 <img src="./Imgs/pipeline.png" width="800px">
 </div>
+
 
 
 <!-- 
@@ -19,7 +22,7 @@ S-Lab, Nanyang Technological University
 layouts. While existing methods primarily focus on English text, less attention has been paid to more complex scripts like Chinese. In this paper, we introduce a high-quality text image SR framework designed to restore the precise strokes of low-resolution (LR) Chinese characters. Unlike methods that rely on character recognition priors to regularize the SR task, we propose a novel structure prior that offers structure-level guidance to enhance visual quality. Our framework incorporates this structure prior within a StyleGAN model, leveraging its generative capabilities for restoration. To maintain the integrity of character structures while accommodating various font styles and layouts, we implement a codebook-based mechanism that restricts the generative space of StyleGAN. Each code in the codebook represents the structure of a specific character, while the vector $w$ in StyleGAN controls the character's style, including typeface, orientation, and location. Through the collaborative interaction between the codebook and style, we generate a high-resolution structure prior that aligns with LR characters both spatially and structurally. Experiments demonstrate that this structure prior provides robust, character-specific guidance, enabling the accurate restoration of clear strokes in degraded characters, even for real-world LR Chinese text with irregular layouts.  </p>
 -->
 
-### Character Structure Prior Pretraining
+### Character Structure Prior Pretraining:
 <div align="center">
 <img src="./Imgs/prior.gif" width="800px">
 <p align="center">  </p>
@@ -40,7 +43,7 @@ layouts. While existing methods primarily focus on English text, less attention 
 - [ ] Release the training code (no plans to release for now). 
 
 
-## Getting Start
+## Getting Started
 
 ```
 git clone https://github.com/csxmli2016/MARCONetPlusPlus
@@ -100,10 +103,9 @@ export BASICSR_JIT='True'
 
 
 
-<details>
-## <summary> Style w interpolation from three characters with different styles </summary>
+## Style w interpolation from three characters with different styles 
 <img src="./Imgs/w-interpolation.gif"  width="400px">
-</details>
+
 
 
 
