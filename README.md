@@ -75,20 +75,6 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -s
 -s: if you want to see the details of prior alignment, predicted characters, and locations, use -s 
 ```
 
-### ⚠️ If you encounter the following error:
-
-```NameError: name 'fused_act_ext' is not defined```
-
-Try running the following command:
-
-```bash
-export BASICSR_JIT='True'
-```
-
-✅ This has resolved the issue in most of our cases.
-
-
-
 
 
 ## 🏃 Restoring Real-world Chinese Text Images
