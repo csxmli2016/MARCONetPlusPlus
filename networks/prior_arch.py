@@ -17,7 +17,7 @@ class TextPriorModel(nn.Module):
         super().__init__()
         self.TextGenerator = StyleCharacter(size=size, style_dim=style_dim, n_mlp=n_mlp, class_num=class_num, lr_mlp=lr_mlp)
         # '''
-        # 下面作用是停止《生成先验》参数更新
+        # Stop gradient
         # '''
         # for param_g in self.TextGenerator.parameters():
         #     param_g.requires_grad = False
