@@ -120,7 +120,7 @@ We encourage any potential collaborations to jointly tackle this challenge and a
 
 
 ## 📎 RealCE-1K benchmark
-To quantitatively evaluate real-world Chinese text images, we filter out images from the test set of [RealCE](https://github.com/mjq11302010044/Real-CE) that have multiple text lines and have inaccurate labels, constructing a Chinese text SR benchmark. You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip).
+To quantitatively evaluate real-world Chinese text images, we filter out images from the test set of [RealCE](https://github.com/mjq11302010044/Real-CE) that have multiple text lines and have inaccurate labels, constructing a Chinese text SR benchmark (see Section IV.B in our paper). You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip).
 
 ## 🍺 Acknowledgement
 This project is built based on the excellent [KAIR](https://github.com/cszn/KAIR) and [RealCE](https://github.com/mjq11302010044/Real-CE).
