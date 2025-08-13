@@ -64,14 +64,15 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_TextLines -a
 ```
 or run for restoring **the whole text image:**
 ```
-CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -s
+CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 ```
 
 ```
 # Parameters:
--i: LR path, default: ./Testsets/LR_TextLines or ./Testsets/LR_TextWhole
--o: save path, default: None will automatically make the saving dir with the format of '[LR path]_TIME_MARCONet'
+-i: LR input path, default: ./Testsets/LR_TextLines or ./Testsets/LR_TextWhole
+-o: save path, default: None will automatically make the saving dir with the format of '[LR path]_TIME_MARCONetPlus'
 -a: if the input is text lines, use -a; otherwise, the input is the whole text image and needs text line detection, do not use -a
+-b: when restoring the whole text images, use -b to restore the background region with BSRGAN
 -s: if you want to see the details of prior alignment, predicted characters, and locations, use -s 
 ```
 
@@ -113,6 +114,9 @@ Despite its high-fidelity performance, MARCONet++ still struggles in some real-w
 We have also explored various approaches, such as training OCR models with Transformers and using YOLO or Transformer-based methods for character detection, but these methods generally encounter the same issues. 
 We encourage any potential collaborations to jointly tackle this challenge and advance robust, high-fidelity text restoration.
 
+
+## 📎 RealCE-1K benchmark
+To quantitatively evaluate real-world Chinese text images, we filter out images from the test set of [RealCE](https://github.com/mjq11302010044/Real-CE) that have multiple text lines and have inaccurate labels, constructing a Chinese text SR benchmark. You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip)
 
 
 
