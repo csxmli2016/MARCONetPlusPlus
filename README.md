@@ -28,9 +28,9 @@ layouts. While existing methods primarily focus on English text, less attention 
 </div>
 
 
-## 🔔 MARCONet *VS.* MARCONet++
-> - MARCONet is designed for **regular character layout** only. 
-> - MARCONet++ has more accurate alignment between character structural prior (green) and the degraded image.
+## 🔔 [MARCONet](https://github.com/csxmli2016/MARCONet) *VS.* [MARCONet++]()
+> - MARCONet is designed for **regular character layout** only. See details of [MARCONet](https://github.com/csxmli2016/MARCONet).
+> - MARCONet++ has more accurate alignment between character structural prior (green structure) and the degraded image.
 <div align="center">
 <img src="./Imgs/marconet_vs_marconetplus.jpg" width="800px">
 </div>
@@ -110,15 +110,16 @@ Despite its high-fidelity performance, MARCONet++ still struggles in some real-w
 
 <img src="./Imgs/failure_case.jpg"  width="800px">
 
-> 🍒 Restoring complex character with high fidelity under such conditions remains significant challenge.
+> 🍒 Restoring complex character with high fidelity under such conditions has significant challenges.
 We have also explored various approaches, such as training OCR models with Transformers and using YOLO or Transformer-based methods for character detection, but these methods generally encounter the same issues. 
 We encourage any potential collaborations to jointly tackle this challenge and advance robust, high-fidelity text restoration.
 
 
 ## 📎 RealCE-1K benchmark
-To quantitatively evaluate real-world Chinese text images, we filter out images from the test set of [RealCE](https://github.com/mjq11302010044/Real-CE) that have multiple text lines and have inaccurate labels, constructing a Chinese text SR benchmark. You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip)
+To quantitatively evaluate real-world Chinese text images, we filter out images from the test set of [RealCE](https://github.com/mjq11302010044/Real-CE) that have multiple text lines and have inaccurate labels, constructing a Chinese text SR benchmark. You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip).
 
-
+## 🍗 Acknowledgement
+This project is built based on the excellent [KAIR](https://github.com/cszn/KAIR) and [RealCE](https://github.com/mjq11302010044/Real-CE).
 
 ## ©️ License
 This project is licensed under <a rel="license" href="https://github.com/csxmli2016/MARCONetPlusPlus/blob/main/LICENSE">NTU S-Lab License 1.0</a>. Redistribution and use should follow this license.
