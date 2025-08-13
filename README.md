@@ -69,11 +69,11 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 
 ```
 # Parameters:
--i: LR input path, default: ./Testsets/LR_TextLines or ./Testsets/LR_TextWhole
--o: save path, default: None will automatically make the saving dir with the format of '[LR path]_TIME_MARCONetPlus'
--a: if the input is text lines, use -a; otherwise, the input is the whole text image and needs text line detection, do not use -a
--b: when restoring the whole text images, use -b to restore the background region with BSRGAN
--s: if you want to see the details of prior alignment, predicted characters, and locations, use -s 
+-i: --input_path, default: ./Testsets/LR_TextLines or ./Testsets/LR_TextWhole
+-o: --output_path, default: None will automatically make the saving dir with the format of '[LR path]_TIME_MARCONetPlus'
+-a: --aligned, if the input is text lines, use -a; otherwise, the input is the whole text image and needs text line detection, do not use -a
+-b: --bg_sr, when restoring the whole text images, use -b to restore the background region with BSRGAN
+-s: --save_text, if you want to see the details of prior alignment, predicted characters, and locations, use -s 
 ```
 
 
