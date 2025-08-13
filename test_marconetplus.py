@@ -14,7 +14,7 @@ from networks.rrdbnet2_arch import RRDBNet as BSRGAN
 
 
 
-def inference(input_path=None, output_path=None, aligned=False, save_text=False, device=None):
+def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, save_text=False, device=None):
 
     scale_factor = 4 # upsample scale factor for the final output, fixed
     if device == None or device == 'gpu':
@@ -34,7 +34,7 @@ def inference(input_path=None, output_path=None, aligned=False, save_text=False,
     os.makedirs(output_path, exist_ok=True)
 
     # use bsrgan to restore the background of the whole image
-    if not aligned: 
+    if bg_sr: 
         ##BG model
         BGModel = BSRGAN(in_nc=3, out_nc=3, nf=64, nb=23, gc=32, sf=2)  # define network
         model_old = torch.load('./checkpoints/bsrgan_bg.pth')
@@ -90,7 +90,7 @@ def inference(input_path=None, output_path=None, aligned=False, save_text=False,
         img_L = imread_uint(img_path, n_channels=3) #RGB 0~255
         height_L, width_L = img_L.shape[:2]
 
-        if not aligned:
+        if not aligned and bg_sr:
             img_E = cv2.resize(img_L, (int(width_L//8*8), int(height_L//8*8)), interpolation = cv2.INTER_AREA)
             img_E = uint2tensor4(img_E).to(device) #N*C*W*H 0~1
             with torch.no_grad():
@@ -152,10 +152,11 @@ if __name__ == '__main__':
     parser.add_argument('-i', '--input_path', type=str, default='./testsets/LR_Whole', help='The lr text image path')
     parser.add_argument('-o', '--output_path', type=str, default=None, help='The save path for text sr result')
     parser.add_argument('-a', '--aligned', action='store_true', help='The input text image contains only text region or not, default:False')
+    parser.add_argument('-b', '--bg_sr', action='store_true', help='When restoring the whole text images, use -b to restore the background region using BSRGAN')
     parser.add_argument('-s', '--save_text', action='store_true', help='Save the LR, SR and debug text layout or not')
     parser.add_argument('-d', '--device', type=str, default=None, help='using cpu or gpu')
 
     args = parser.parse_args()
-    inference(args.input_path, args.output_path, args.aligned, args.save_text, args.device)
+    inference(args.input_path, args.output_path, args.aligned, args.bg_sr, args.save_text, args.device)
 
 
