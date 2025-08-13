@@ -28,7 +28,7 @@ layouts. While existing methods primarily focus on English text, less attention 
 </div>
 
 
-## 🔔 [MARCONet](https://github.com/csxmli2016/MARCONet) *VS.* [MARCONet++]()
+## 🔔 MARCONet 🆚 MARCONet++
 > - MARCONet is designed for **regular character layout** only. See details of [MARCONet](https://github.com/csxmli2016/MARCONet).
 > - MARCONet++ has more accurate alignment between character structural prior (green structure) and the degraded image.
 <div align="center">
@@ -79,7 +79,9 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 
 
 ## 🏃 Restoring Real-world Chinese Text Images
-> We use [BSRGAN](https://github.com/cszn/BSRGAN) to restore the background region
+> - We use [BSRGAN](https://github.com/cszn/BSRGAN) to restore the background region.
+> - The parameters are tested on an NVIDIA A100 GPU (40G).
+> - ⚠️ If the inference speed is slow, this is caused by the large size of the input text image, and you can resize it based on your needs.
 
 [<img src="Imgs/whole_1.jpg" height="270px"/>](https://imgsli.com/NDA2MDUw) [<img src="Imgs/whole_2.jpg" height="270px"/>](https://imgsli.com/NDA2MDYw) 
 
@@ -92,9 +94,11 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 
 
 
+<details>
+  <summary><h2>🏃 Style w interpolation from three characters with different styles</h2></summary>
 
-## 🏃 Style w interpolation from three characters with different styles 
-<img src="./Imgs/w-interpolation.gif"  width="400px">
+  <img src="./Imgs/w-interpolation.gif" width="400px">
+</details>
 
 
 
@@ -118,7 +122,7 @@ We encourage any potential collaborations to jointly tackle this challenge and a
 ## 📎 RealCE-1K benchmark
 To quantitatively evaluate real-world Chinese text images, we filter out images from the test set of [RealCE](https://github.com/mjq11302010044/Real-CE) that have multiple text lines and have inaccurate labels, constructing a Chinese text SR benchmark. You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip).
 
-## 🍗 Acknowledgement
+## 🍺 Acknowledgement
 This project is built based on the excellent [KAIR](https://github.com/cszn/KAIR) and [RealCE](https://github.com/mjq11302010044/Real-CE).
 
 ## ©️ License
