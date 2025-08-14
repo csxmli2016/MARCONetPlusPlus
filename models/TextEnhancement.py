@@ -146,6 +146,8 @@ class MARCONetPlus(object):
 
 
                 in_img, SQ, save_debug, pred_text, preds_locs_txt = self._process_text_line(cropped_img)
+                if in_img is None:
+                    continue
                 h_crop, w_crop = cropped_img.shape[:2]
                 SQ = cv2.resize(SQ, (w_crop * sf, h_crop * sf), interpolation=cv2.INTER_CUBIC)
                 
@@ -194,10 +196,11 @@ class MARCONetPlus(object):
         else: #aligned
             
             in_img, SQ, save_debug, pred_text, preds_locs_txt = self._process_text_line(img)
-            debug_texts.append(save_debug)
-            orig_texts.append(in_img)
-            enhanced_texts.append(SQ)
-            pred_texts.append(''.join(pred_text))
+            if in_img is not None:
+                debug_texts.append(save_debug)
+                orig_texts.append(in_img)
+                enhanced_texts.append(SQ)
+                pred_texts.append(''.join(pred_text))
         
         return img, orig_texts, enhanced_texts, debug_texts, pred_texts #, preds_locs_txt
 
@@ -359,3 +362,4 @@ class MARCONetPlus(object):
 
 if __name__ == '__main__':
     print('Test')
+
