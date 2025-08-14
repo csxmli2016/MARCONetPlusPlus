@@ -20,6 +20,8 @@ from networks import *
 import warnings
 warnings.filterwarnings('ignore')
 
+from modelscope import snapshot_download
+
 
 ##########################################################################################
 ###############Text Restoration Model revised by xiaoming li
@@ -50,30 +52,32 @@ def tensor2numpy(tensor):
 
 
 class MARCONetPlus(object):
-    def __init__(self, WEncoderPath=None, PriorModelPath=None, SRModelPath=None, device='cuda'):
+    def __init__(self, WEncoderPath=None, PriorModelPath=None, SRModelPath=None, YoloPath=None, device='cuda'):
         self.device = device
-    
-        self.modelscope_ocr_recognition = pipeline(Tasks.ocr_recognition, model='damo/cv_convnextTiny_ocr-recognition-general_damo')
-        self.yolo_character = YOLO('./checkpoints/yolo11m_short_character.pt')
 
+        modelscope_dir = snapshot_download('damo/cv_convnextTiny_ocr-recognition-general_damo', cache_dir='./checkpoints/modelscope_ocr')
+        self.modelscope_ocr_recognition = pipeline(Tasks.ocr_recognition, model=modelscope_dir)
+        self.yolo_character = YOLO(YoloPath)
 
         self.modelWEncoder = PSPEncoder() # WEncoder()
         self.modelWEncoder.load_state_dict(torch.load(WEncoderPath)['params'], strict=True)
         self.modelWEncoder.eval()
         self.modelWEncoder.to(device)
-        print('{:>25s} : {:.2f} M Parameters'.format('modelWEncoder', get_parameter_details(self.modelWEncoder)))
 
         self.modelPrior = TextPriorModel()
         self.modelPrior.load_state_dict(torch.load(PriorModelPath)['params'], strict=True)
         self.modelPrior.eval()
         self.modelPrior.to(device)
-        print('{:>25s} : {:.2f} M Parameters'.format('modelPrior', get_parameter_details(self.modelPrior)))
-
     
         self.modelSR = SRNet()
         self.modelSR.load_state_dict(torch.load(SRModelPath)['params'], strict=True)
         self.modelSR.eval()
         self.modelSR.to(device)
+
+
+        print('='*128)
+        print('{:>25s} : {:.2f} M Parameters'.format('modelWEncoder', get_parameter_details(self.modelWEncoder)))
+        print('{:>25s} : {:.2f} M Parameters'.format('modelPrior', get_parameter_details(self.modelPrior)))
         print('{:>25s} : {:.2f} M Parameters'.format('modelSR', get_parameter_details(self.modelSR)))
         print('='*128)
 
@@ -90,6 +94,7 @@ class MARCONetPlus(object):
 
         height, width = img.shape[:2]
         bg_height, bg_width = bg.shape[:2]
+        print(' ' * 25 + f' ... The input->output image size is {bg_height//sf}*{bg_width//sf}->{bg_height}*{bg_width}')
         
         full_mask_blur = np.zeros(bg.shape, dtype=np.float32)
         full_mask_noblur = np.zeros(bg.shape, dtype=np.float32)
@@ -142,7 +147,7 @@ class MARCONetPlus(object):
 
                 in_img, SQ, save_debug, pred_text, preds_locs_txt = self._process_text_line(cropped_img)
                 h_crop, w_crop = cropped_img.shape[:2]
-                SQ = cv2.resize(SQ, (w_crop * 4, h_crop * 4), interpolation=cv2.INTER_CUBIC)
+                SQ = cv2.resize(SQ, (w_crop * sf, h_crop * sf), interpolation=cv2.INTER_CUBIC)
                 
                 debug_texts.append(save_debug)
                 orig_texts.append(in_img)
@@ -343,6 +348,8 @@ class MARCONetPlus(object):
         ShowLQ = ShowLQ[:,:,::-1]
         fusion_bg = fusion_bg.astype(ShowLQ.dtype)
         fusion_bg = fusion_bg * 0.3 * mask + ShowLQ * 0.7 * mask + (1-mask) * ShowLQ
+
+        ShowPrior = cv2.normalize(ShowPrior, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
 
         save_debug = np.vstack((ShowLQ, ShowPredLoc[:,:,::-1], SR, ShowPrior, fusion_bg))
 
