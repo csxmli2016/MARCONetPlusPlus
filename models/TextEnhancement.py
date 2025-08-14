@@ -134,7 +134,8 @@ class MARCONetPlus(object):
                     ref_h = self.insize
                     ref_w = int(ref_h * w / h)
                 else:
-                    return (None,) * 5
+                    print(' ' * 25 + ' ... Can not handle vertical text temporarily')
+                    continue
 
                 ref_point = np.float32([[0,0], [ref_w, 0], [ref_w, ref_h], [0, ref_h]])
                 det_point = np.float32(extend_box)
@@ -362,4 +363,5 @@ class MARCONetPlus(object):
 
 if __name__ == '__main__':
     print('Test')
+
 
