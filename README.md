@@ -64,7 +64,7 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_TextLines -a
 ```
 or run for restoring **the whole text image:**
 ```
-CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
+CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s -f 2
 ```
 
 ```
@@ -72,7 +72,8 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 -i: --input_path, default: ./Testsets/LR_TextLines or ./Testsets/LR_TextWhole
 -o: --output_path, default: None will automatically make the saving dir with the format of '[LR path]_TIME_MARCONetPlus'
 -a: --aligned, if the input is text lines, use -a; otherwise, the input is the whole text image and needs text line detection, do not use -a
--b: --bg_sr, when restoring the whole text images, use -b to restore the background region with BSRGAN
+-b: --bg_sr, when restoring the whole text images, use -b to restore the background region with BSRGAN. Without -b, background will keep the same as input
+-f: --factor_scale, default: 2. When restoring the whole text images, use -f to define the scale factor of output
 -s: --save_text, if you want to see the details of prior alignment, predicted characters, and locations, use -s 
 ```
 
@@ -81,7 +82,7 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 ## 🏃 Restoring Real-world Chinese Text Images
 > - We use [BSRGAN](https://github.com/cszn/BSRGAN) to restore the background region.
 > - The parameters are tested on an NVIDIA A100 GPU (40G).
-> - ⚠️ If the inference speed is slow, this is caused by the large size of the input text image, and you can resize it based on your needs.
+> - ⚠️ If the inference speed is slow, this is caused by the large size of the input text image or the large factor_scale. You can resize it based on your needs.
 
 [<img src="Imgs/whole_1.jpg" height="270px"/>](https://imgsli.com/NDA2MDUw) [<img src="Imgs/whole_2.jpg" height="270px"/>](https://imgsli.com/NDA2MDYw) 
 
@@ -93,10 +94,7 @@ CUDA_VISIBLE_DEVICES=0 python test_marconetplus.py -i ./Testsets/LR_Whole -b -s
 <img src="Imgs/text_line_sr.jpg" width="800px"/>
 
 
-
-<details>
-  <summary><h2>🏃 Style w interpolation from three characters with different styles</h2></summary>
-
+<details><summary><h2>🏃 Style w interpolation from three characters with different styles</h2></summary>
   <img src="./Imgs/w-interpolation.gif" width="400px">
 </details>
 
@@ -120,7 +118,7 @@ We encourage any potential collaborations to jointly tackle this challenge and a
 
 
 ## 📎 RealCE-1K benchmark
-To quantitatively evaluate on real-world Chinese text line images, we curate a benchmark by filtering the [RealCE](https://github.com/mjq11302010044/Real-CE) test set to exclude images containing multiple text lines or inaccurate annotations, thereby constructing a Chinese text SR benchmark (see Section IV.B of our paper). You can download it from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip).
+To quantitatively evaluate on real-world Chinese text line images, we curate a benchmark by filtering the [RealCE](https://github.com/mjq11302010044/Real-CE) test set to exclude images containing multiple text lines or inaccurate annotations, thereby constructing a Chinese text SR benchmark (see Section IV.B of our paper). You can download the RealCE-1K benchmark from [here](https://github.com/csxmli2016/MARCONetPlusPlus/releases/download/v1/RealCE-1K.zip).
 
 ## 🍺 Acknowledgement
 This project is built based on the excellent [KAIR](https://github.com/cszn/KAIR) and [RealCE](https://github.com/mjq11302010044/Real-CE).
