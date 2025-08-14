@@ -126,7 +126,7 @@ def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, sca
 
         
         ext = '.png'
-        if SQ is None:
+        if SQ is None or len(en_texts) == 0:
             continue
         if not aligned:
             SQ = cv2.resize(SQ.astype(np.float32), (width_S, height_S), interpolation=cv2.INTER_AREA)
