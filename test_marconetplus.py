@@ -14,9 +14,8 @@ from networks.rrdbnet2_arch import RRDBNet as BSRGAN
 
 
 
-def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, save_text=False, device=None):
+def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, scale_factor=2, save_text=False, device=None):
 
-    scale_factor = 4 # upsample scale factor for the final output, fixed
     if device == None or device == 'gpu':
         use_cuda = torch.cuda.is_available()
     if device == 'cpu':
@@ -57,8 +56,9 @@ def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, sav
     WEncoderPath='./checkpoints/net_w_encoder_860000.pth'
     PriorModelPath='./checkpoints/net_prior_860000.pth'
     SRModelPath='./checkpoints/net_sr_860000.pth'
+    YoloPath = './checkpoints/yolo11m_short_character.pt'
 
-    TextModel = MARCONetPlus(WEncoderPath, PriorModelPath, SRModelPath, device=device)
+    TextModel = MARCONetPlus(WEncoderPath, PriorModelPath, SRModelPath, YoloPath, device=device)
 
     print('{:>25s} : {:s}'.format('Model Name', 'MARCONetPlusPlus'))
     if use_cuda:
@@ -75,6 +75,7 @@ def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, sav
         print('{:>25s} : {:s}'.format('Image Details', 'Aligned Text Layout. No text detection is used.'))
     else:
         print('{:>25s} : {:s}'.format('Image Details', 'UnAligned Text Image. It will crop text region using CnSTD, restore, and paste results back.'))
+        print('{:>25s} : {}'.format('Scale Facter', scale_factor))
     print('{:>25s} : {:s}'.format('Save LR & SR text layout', 'True' if save_text else 'False'))
 
     idx = 0    
@@ -117,9 +118,9 @@ def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, sav
         height_S = (height_L * scale_factor)
         img_E = cv2.resize(img_E, (width_S, height_S), interpolation = cv2.INTER_AREA)
 
-        #########################################################
+        ############################################################
         #####(2) Restore Each Region and Paste to the whole image
-        #########################################################
+        ############################################################
         
         SQ, ori_texts, en_texts, debug_texts, pred_texts = TextModel.handle_texts(img=img_L, bg=img_E, sf=scale_factor, is_aligned=aligned)
 
@@ -133,30 +134,30 @@ def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, sav
         else:
             cv2.imwrite(os.path.join(E_path, img_name+ext), en_texts[0][:,:,::-1].astype(np.uint8))
 
-        ####################################
-        #####(3) Save Cropped Results
-        ####################################
+        #####################################################
+        #####(3) Save Character Prior, location, SR Results
+        #####################################################
         if save_text:
             for m, (et, ot, dt, pt) in enumerate(zip(en_texts, ori_texts, debug_texts, pred_texts)): ##save each face region
                 w, h, c = et.shape
-                cv2.imwrite(os.path.join(E_path, img_name +'_patch_{}_{}_Debug.jpg'.format(m, pt)), dt[:,:,::-1])
+                cv2.imwrite(os.path.join(E_path, img_name +'_patch_{}_{}_Debug.jpg'.format(m, pt)), dt[:,:,::-1].astype(np.uint8))
 
     
 if __name__ == '__main__':
     '''
-    For the whole image: python test_marconetplus.py -s -i ./testsets/LR
-    For the aligned text image: python test_marconetplus.py -a -s -i ./testsets/LR_Crop
-
+    For the whole image: python test_marconetplus.py -i ./Testsets/LR_Whole -b -s -f 2
+    python test_marconetplus.py -i ./Testsets/LR_TextLines -a -s
     '''
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input_path', type=str, default='./testsets/LR_Whole', help='The lr text image path')
     parser.add_argument('-o', '--output_path', type=str, default=None, help='The save path for text sr result')
     parser.add_argument('-a', '--aligned', action='store_true', help='The input text image contains only text region or not, default:False')
     parser.add_argument('-b', '--bg_sr', action='store_true', help='When restoring the whole text images, use -b to restore the background region using BSRGAN')
+    parser.add_argument('-f', '--factor_scale', type=int, default=2, help='When restoring the whole text images, use -f to define the scale factor')
     parser.add_argument('-s', '--save_text', action='store_true', help='Save the LR, SR and debug text layout or not')
     parser.add_argument('-d', '--device', type=str, default=None, help='using cpu or gpu')
 
     args = parser.parse_args()
-    inference(args.input_path, args.output_path, args.aligned, args.bg_sr, args.save_text, args.device)
+    inference(args.input_path, args.output_path, args.aligned, args.bg_sr, args.factor_scale, args.save_text, args.device)
 
 
