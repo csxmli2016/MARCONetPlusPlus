@@ -150,7 +150,7 @@ class MARCONetPlus(object):
                 if in_img is None:
                     continue
                 h_crop, w_crop = cropped_img.shape[:2]
-                SQ = cv2.resize(SQ, (w_crop * sf, h_crop * sf), interpolation=cv2.INTER_CUBIC)
+                SQ = cv2.resize(SQ, (w_crop * sf, h_crop * sf), interpolation=cv2.INTER_LINEAR)
                 
                 debug_texts.append(save_debug)
                 orig_texts.append(in_img)
@@ -223,8 +223,8 @@ class MARCONetPlus(object):
         w_norm = int(self.insize * width / height) // 4 * 4
         h_norm = self.insize
 
-        img = cv2.resize(img, (w_norm*4, h_norm*4), interpolation=cv2.INTER_CUBIC)
-        in_img = cv2.resize(img, (w_norm, h_norm), interpolation=cv2.INTER_CUBIC)
+        img = cv2.resize(img, (w_norm*4, h_norm*4), interpolation=cv2.INTER_LINEAR)
+        in_img = cv2.resize(img, (w_norm, h_norm), interpolation=cv2.INTER_LINEAR)
         ShowLQ = img[:,:,::-1]
 
         LQ_HeightNorm = transforms.ToTensor()(in_img)
@@ -323,7 +323,7 @@ class MARCONetPlus(object):
         prior128 = np.clip(prior128.float().cpu().numpy(), 0, 1) * 255.0
         prior128 = np.repeat(prior128, 3, axis=2)
 
-        ShowPrior = cv2.resize(prior128, (SR.shape[1], int(128 * SR.shape[1] / prior128.shape[1])), interpolation=cv2.INTER_CUBIC)
+        ShowPrior = cv2.resize(prior128, (SR.shape[1], int(128 * SR.shape[1] / prior128.shape[1])), interpolation=cv2.INTER_LINEAR)
         
 
         #--------Fuse the structure prior to the LR input to show the details of alignment--------------
@@ -363,5 +363,6 @@ class MARCONetPlus(object):
 
 if __name__ == '__main__':
     print('Test')
+
 
 
