@@ -12,8 +12,6 @@ from utils.utils_image import get_image_paths, imread_uint, uint2tensor4, tensor
 from networks.rrdbnet2_arch import RRDBNet as BSRGAN
 
 
-
-
 def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, scale_factor=2, save_text=False, device=None):
 
     if device == None or device == 'gpu':
@@ -34,7 +32,7 @@ def inference(input_path=None, output_path=None, aligned=False, bg_sr=False, sca
 
     # use bsrgan to restore the background of the whole image
     if bg_sr: 
-        ##BG model
+        ##Define BG restoration model
         BGModel = BSRGAN(in_nc=3, out_nc=3, nf=64, nb=23, gc=32, sf=2)  # define network
         model_old = torch.load('./checkpoints/bsrgan_bg.pth')
         state_dict = BGModel.state_dict()
